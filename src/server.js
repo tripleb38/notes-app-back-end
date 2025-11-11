@@ -43,7 +43,10 @@ const init = async () => {
     // Biarkan respons lanjut ke tahap berikutnya
     return h.continue;
   });
-r berjalan pada ${server.info.uri}`);
+
+  // Mulai server
+  await server.start();
+  console.log(`Server berjalan pada ${server.info.uri}`);
 };
 
 init();
