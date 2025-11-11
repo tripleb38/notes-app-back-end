@@ -4,7 +4,7 @@ const Hapi = require("@hapi/hapi");
 const notes = require("./api/notes");
 const NotesService = require("./services/postgres/NotesService");
 const NotesValidator = require("./validator/notes");
-const ClientError = require("./exceptions/ClientError"); // pastikan ini diimpor
+const ClientError = require("./exceptions/ClientError");
 
 const init = async () => {
   const notesService = new NotesService();
@@ -40,10 +40,13 @@ const init = async () => {
       return newResponse;
     }
 
-    // Biarkan respons lanjut ke tahap berikutnya
+    // Jika bukan ClientError, lanjutkan response normal
     return h.continue;
   });
-r berjalan pada ${server.info.uri}`);
+
+  // Jalankan server
+  await server.start();
+  console.log(`Server berjalan pada ${server.info.uri}`);
 };
 
 init();
